@@ -1,0 +1,149 @@
+作业1
+select * from emp,dept where emp.empno in(
+select max(empno) from emp group by deptno having count(deptno)>1 and dept.deptno=emp.deptno);
++-------+-------+-----------+------+------------+------+------+--------+--------+------------+----------+
+| EMPNO | ENAME | JOB       | MGR  | HIREDATE   | SAL  | COMM | DEPTNO | DEPTNO | DNAME      | LOC      |
++-------+-------+-----------+------+------------+------+------+--------+--------+------------+----------+
+|  7839 | KING  | PRESIDENT |      | 1981/11/17 | 5000 |      | 10     |     10 | ACCOUNTING | NEW YORK |
+|  7900 | JAMES | CLERK     | 7698 | 1981/12/3  |  950 |      | 30     |     30 | SALES      | CHICAGO  |
+|  7902 | FORD  | ANALYST   | 7566 | 1981/12/3  | 3000 |      | 20     |     20 | RESEARCH   | DALLAS   |
++-------+-------+-----------+------+------------+------+------+--------+--------+------------+----------+
+
+
+作业2
+create table collectlist(
+id int auto_increment primary key,
+name varchar(20));
+insert into collectlist(id,name) 
+values(1,"model car"),
+(2,"Naruto hands"),
+(3,"shoes");
+select * from collectlist;
++----+--------------+
+| id | name         |
++----+--------------+
+|  1 | model car    |
+|  2 | Naruto hands |
+|  3 | shoes        |
++----+--------------+
+delete from collectlist where id=1;
++----+--------------+
+| id | name         |
++----+--------------+
+|  2 | Naruto hands |
+|  3 | shoes        |
++----+--------------+
+select name from collectlist;
++--------------+
+| name         |
++--------------+
+| Naruto hands |
+| shoes        |
++--------------+
+
+作业3
+create table movies(
+id int auto_increment primary key,
+name varchar(30),
+year int,director varchar(40),
+grade varchar(3));
+
+insert into movies(id,name,year,director,grade)
+values(1,"The Amazing Spider-Man",2012,"Mark webb",7.2),
+(2,"Iron Man",2008,"Jon favreau",7.9),
+(3,"Bia Fish & Begonia",2016,"Liang xuan",6.6),
+(4,"Monkey king: Hero Is Back",2015,"Tian Xiao Peng",8.2),
+(5,"Hello Mr.Billionaire",2018,"Yan Fei",6.7);
+
+select * from movies;
++----+---------------------------+------+----------------+-------+
+| id | name                      | year | director       | grade |
++----+---------------------------+------+----------------+-------+
+|  1 | The Amazing Spider-Man    | 2012 | Mark webb      |   7.2 |
+|  2 | Iron Man                  | 2008 | Jon favreau    |   7.9 |
+|  3 | Bia Fish & Begonia        | 2016 | Liang xuan     |   6.6 |
+|  4 | Monkey king: Hero Is Back | 2015 | Tian Xiao Peng |   8.2 |
+|  5 | Hello Mr.Billionaire      | 2018 | Yan Fei        |   6.7 |
++----+---------------------------+------+----------------+-------+
+select * from movies where name like "%king%";
++----+---------------------------+------+----------------+-------+
+| id | name                      | year | director       | grade |
++----+---------------------------+------+----------------+-------+
+|  4 | Monkey king: Hero Is Back | 2015 | Tian Xiao Peng |   8.2 |
++----+---------------------------+------+----------------+-------+
+select * from movies where director like "%fa%";
++----+----------+------+-------------+-------+
+| id | name     | year | director    | grade |
++----+----------+------+-------------+-------+
+|  2 | Iron Man | 2008 | Jon favreau |   7.9 |
++----+----------+------+-------------+-------+
+select * from movies where year like 2015;
++----+---------------------------+------+----------------+-------+
+| id | name                      | year | director       | grade |
++----+---------------------------+------+----------------+-------+
+|  4 | Monkey king: Hero Is Back | 2015 | Tian Xiao Peng |   8.2 |
++----+---------------------------+------+----------------+-------+
+select * from movies where movies.grade in(select max(grade) from movies);
++----+---------------------------+------+----------------+-------+
+| id | name                      | year | director       | grade |
++----+---------------------------+------+----------------+-------+
+|  4 | Monkey king: Hero Is Back | 2015 | Tian Xiao Peng | 8.2   |
++----+---------------------------+------+----------------+-------+
+
+作业4
+create table user(
+id int auto_increment primary key,
+name varchar(20),
+method varchar(10),
+logindate date);
+insert into user(id,name,method,logindate) 
+values(155,"kk","app","2018-09-01"),
+(257,"hh","website","2018-10-28"),
+(162,"ll","ipad","2018-11-15");
+select * from user;
++-----+------+---------+------------+
+| id  | name | method  | logindate  |
++-----+------+---------+------------+
+| 155 | kk   | app     | 2018-09-01 |
+| 162 | ll   | ipad    | 2018-11-15 |
+| 257 | hh   | website | 2018-10-28 |
++-----+------+---------+------------+
+select case when abs(datediff(logindate,now()))>30 then "niqusiba" 
+when abs(datediff(logindate,now()))>9 then "nitemehuibuhuilai"
+when abs(datediff(logindate,now()))>7 then "kuaihuilaixiaotiancai" 
+end from user;
++--------------------------+
+| niqusiba                 |                                                                                                                                                                         
+| kuaihuilaixiaotiancai    |                                                                                                                                                                        
+| nitemehuibuhuilai        |                                                                                                                                                                        
++--------------------------+
+
+作业5
+<h1>chehe</h1>
+<p>Hoe in the middle of the day,</p> 
+<p>sweat drops of grain under the soil.</p>
+<p>who knows the plate,</p>
+<p>every grain is hard.</p>
+<br />
+<h1>Jing Ye Si</h1>
+<p>The bright moonlight in front of the bed,</p>
+<p>Doubt is the frost on the ground.</p>
+<p>Raise head to look at the bright moon,</p>
+<p>Lower head think hometown.</p>
+
+
+chehe
+
+Hoe in the middle of the day,
+sweat drops of grain under the soil.
+who knows the plate,
+every grain is hard.
+
+
+Jing Ye Si
+
+The bright moonlight in front of the bed,
+Doubt is the frost on the ground.
+Raise head to look at the bright moon,
+Lower head think hometown.
+
